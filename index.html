@@ -456,7 +456,12 @@
                         <div class="glass p-6 rounded-[2rem] shadow-lg flex items-center gap-6 border-white/40 group card-anim">
                             <span class="text-4xl font-black ${type === 'rules' ? 'text-blue-500' : 'text-green-500'} opacity-20">${String(idx + 1).padStart(2, '0')}</span>
                             <div class="flex-1">
-                                <input type="text" value="${item.title}" oninput="config['${type}'][${idx}].title = this.value; saveToLocal(); showAutoSaveIndicator();" class="editable-input text-4xl font-black text-slate-800" placeholder="제목">
+                                <textarea 
+    oninput="config['${type}'][${idx}].desc = this.value; this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'; saveToLocal(); showAutoSaveIndicator();" 
+    class="editable-input text-base text-slate-500 font-bold mt-0.5 w-full resize-none overflow-hidden" 
+    placeholder="내용"
+    rows="1"
+>${item.desc}</textarea>
                                 <input type="text" value="${item.desc}" oninput="config['${type}'][${idx}].desc = this.value; saveToLocal(); showAutoSaveIndicator();" class="editable-input text-base text-slate-500 font-bold mt-0.5" placeholder="내용">
                             </div>
                             <button onclick="config['${type}'].splice(${idx}, 1); renderContent(); saveToLocal(); showAutoSaveIndicator();" class="p-2 text-red-400 opacity-0 group-hover:opacity-100 transition-all"><i data-lucide="trash-2"></i></button>
