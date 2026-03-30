@@ -417,7 +417,7 @@
                 titleEl.innerText = "알림장"; subtitleEl.innerText = "Notice Board";
                 container.innerHTML = `<div class="glass p-10 rounded-[3rem] shadow-xl h-full flex flex-col border-white/50">
                         <textarea id="notice-textarea" oninput="config.notice = this.value; saveToLocal(); showAutoSaveIndicator();" 
-                        class="w-full h-full bg-transparent border-none outline-none resize-none text-4xl"
+                        class="w-full h-full bg-transparent border-none outline-none resize-none text-5xl"
                         placeholder="오늘의 알림 사항을 입력하세요...">${config.notice}</textarea></div>`;
             } 
             else {
@@ -432,19 +432,14 @@
                             <span class="text-4xl font-black ${type === 'rules' ? 'text-blue-500' : 'text-green-500'} opacity-20">${String(idx + 1).padStart(2, '0')}</span>
                             <div class="flex-1">
                                 <input type="text" value="${item.title}" 
-    oninput="config['${type}'][${idx}].title = this.value; saveToLocal(); showAutoSaveIndicator();" 
-    class="editable-input text-4xl font-black text-slate-800 w-full" 
-    placeholder="제목을 입력하세요">
+                                oninput="config['${type}'][${idx}].title = this.value; saveToLocal(); showAutoSaveIndicator();" 
+                                class="editable-input text-4xl font-black text-slate-800 w-full block p-0" 
+                                placeholder="제목을 입력하세요">
 
-<details class="mt-2 text-slate-500">
-    <summary class="cursor-pointer text-sm font-bold hover:text-blue-500 transition-colors">
-        내용
-    </summary>
-    <input type="text" value="${item.desc}" 
-        oninput="config['${type}'][${idx}].desc = this.value; saveToLocal(); showAutoSaveIndicator();" 
-        class="editable-input text-2xl font-bold mt-1 w-full" 
-        placeholder="">
-</details>
+                                <input type="text" value="${item.desc}" 
+                                oninput="config['${type}'][${idx}].desc = this.value; saveToLocal(); showAutoSaveIndicator();" 
+                                class="editable-input text-xl font-bold text-slate-500 w-full block mt-0 p-0" 
+                                placeholder="내용을 입력하세요">
                             </div>
                             <button onclick="config['${type}'].splice(${idx}, 1); renderContent(); saveToLocal(); showAutoSaveIndicator();" class="p-2 text-red-400 opacity-0 group-hover:opacity-100 transition-all"><i data-lucide="trash-2"></i></button>
                         </div>`;
