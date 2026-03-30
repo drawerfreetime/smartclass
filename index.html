@@ -416,8 +416,8 @@
             if (config.viewMode === 'notice') {
                 titleEl.innerText = "알림장"; subtitleEl.innerText = "Notice Board";
                 container.innerHTML = `<div class="glass p-10 rounded-[3rem] shadow-xl h-full flex flex-col border-white/50">
-                        <textarea id="notice-textarea" oninput="config.notice = this.value; saveToLocal(); showAutoSaveIndicator();" 
-                        class="w-full h-full bg-transparent border-none outline-none resize-none text-6xl"
+                        class="w-full h-full bg-transparent border-none outline-none resize-none"
+                        style="font-size: 60px !important; line-height: 1.6; font-weight: normal;"
                         placeholder="오늘의 알림 사항을 입력하세요...">${config.notice}</textarea></div>`;
             } 
             else {
