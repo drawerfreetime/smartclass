@@ -310,12 +310,12 @@
                     if (currentTime >= (sH * 60 + sM) && currentTime < (eH * 60 + eM)) {
                         status = item.name;
                         found = true;
-                        if (now.getSeconds() === 0 && !chimePlayed && currentTime === (sH * 60 + sM)) {
-                            audio.play().catch(()=>{}); chimePlayed = true;
-                            setTimeout(() => { chimePlayed = false; }, 60000);
-                        }
-                        break;
-                    }
+                        if (config.viewMode === 'notice') {
+        titleEl.innerText = "알림장"; subtitleEl.innerText = "Notice Board";
+        container.innerHTML = `<div class="glass p-10 rounded-[3rem] shadow-xl h-full flex flex-col border-white/50">
+                <textarea class="bg-transparent border-none outline-none resize-none text-4xl leading-[1.6] text-slate-700"
+                placeholder="오늘의 알림 사항을 입력하세요...">${config.notice}</textarea></div>`;
+    }
                 }
                 if (!found && currentTime >= 480) status = "방과후 시간";
             }
@@ -431,16 +431,16 @@
                         <div class="glass p-6 rounded-[2rem] shadow-lg flex items-center gap-6 border-white/40 group card-anim">
                             <span class="text-4xl font-black ${type === 'rules' ? 'text-blue-500' : 'text-green-500'} opacity-20">${String(idx + 1).padStart(2, '0')}</span>
                             <div class="flex-1">
-                                <input type="text" value="${item.title}" 
-                                oninput="config['${type}'][${idx}].title = this.value; saveToLocal(); showAutoSaveIndicator();" 
-                                class="editable-input text-4xl font-black text-slate-800 w-full block p-0" 
-                                placeholder="제목">
+    <textarea rows="1" 
+        oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'; config['${type}'][${idx}].title = this.value; saveToLocal(); showAutoSaveIndicator();" 
+        class="editable-input text-4xl font-black text-slate-800 w-full block p-0 resize-none overflow-hidden bg-transparent border-none outline-none" 
+        placeholder="제목">${item.title}</textarea>
 
-                                <input type="text" value="${item.desc}" 
-                                oninput="config['${type}'][${idx}].desc = this.value; saveToLocal(); showAutoSaveIndicator();" 
-                                class="editable-input text-xl font-bold text-slate-500 w-full block mt-0 p-0" 
-                                placeholder="-">
-                            </div>
+    <textarea rows="1" 
+        oninput="this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'; config['${type}'][${idx}].desc = this.value; saveToLocal(); showAutoSaveIndicator();" 
+        class="editable-input text-xl font-bold text-slate-500 w-full block mt-1 p-0 resize-none overflow-hidden bg-transparent border-none outline-none" 
+        placeholder="-">${item.desc}</textarea>
+</div>
                             <button onclick="config['${type}'].splice(${idx}, 1); renderContent(); saveToLocal(); showAutoSaveIndicator();" class="p-2 text-red-400 opacity-0 group-hover:opacity-100 transition-all"><i data-lucide="trash-2"></i></button>
                         </div>`;
                 });
